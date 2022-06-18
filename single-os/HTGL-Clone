@@ -1,0 +1,39 @@
+#!/bin/bash 
+# _   _ _____ ____ _           ____ _                  
+#| | | |_   _/ ___| |         / ___| | ___  _ __   ___ 
+#| |_| | | || |  _| |   _____| |   | |/ _ \| '_ \ / _ \
+#|  _  | | || |_| | |__|_____| |___| | (_) | | | |  __/
+#|_| |_| |_| \____|_____|     \____|_|\___/|_| |_|\___|
+                                                      
+#                                  Write by dindinG41TR3
+# CLONE
+# Lokasi Disk    : /dev/sda1 
+# Lokasi Squash  : /lib/live/mount/persistence/sdb1/live/filesystem.squashfs (DEFAULTS)
+# Lokasi Clone   : /root/clone/
+
+cd /root
+mkdir clone
+cd clone
+mkdir disk mnt
+mount ./dev/sda1 ./disk
+mount /lib/live/mount/persistence/sdb1/live/filesystem.squashfs ./mnt 
+rsync -a ./mnt/ ./disk/
+umount ./mnt
+cp /etc/resolv.conf ./disk/etc/
+mount --bind /dev/ ./disk/dev/
+chroot ./disk
+mount proc none /proc
+mount sysfs none /sys
+mount devpts none /dev/pts
+export HOME=/root
+export LC_ALL=C
+apt install grub2
+update-grub
+grub-install /dev/sdauname
+
+
+# blkid
+# fstab
+# UNCONFIGURED FSTAB FOR BASE SYSTEM
+UUID=b56bb36d-fe71-4928-ae67-791d1491ef48 /    ext4 defaults 1 1
+UUID=d62ce4fb-bac5-45fe-92da-804033bc2729 swap swap defaults 0 0
