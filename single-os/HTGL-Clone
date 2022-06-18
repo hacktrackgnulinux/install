@@ -29,7 +29,7 @@ export HOME=/root
 export LC_ALL=C
 apt install grub2
 update-grub
-grub-install /dev/sdauname
+grub-install /dev/sda
 
 
 # blkid
