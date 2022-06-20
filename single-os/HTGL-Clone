@@ -42,7 +42,6 @@ apt install grub2
 update-grub
 grub-install /dev/sda
 
-
 # 7. Tahapan Pengisian fstab 
 # GUnakan Perintah "blkid" Untuk mengetahui UUID Disk
 # Silahkan EDit Berkas di Lokasi /etc/fstab
@@ -50,3 +49,14 @@ grub-install /dev/sda
 # Contohnya Dibawah ini
 UUID=b56bb36d-fe71-4928-ae67-791d1491ef48 /    ext4 defaults 1 1
 UUID=d62ce4fb-bac5-45fe-92da-804033bc2729 swap swap defaults 0 0
+
+# 8. Bersih Bersih dan Penutup
+apt-get clean 
+apt-get autoremove 
+rm -rf /tmp/* ~/.bash_history
+umount /proc 
+umount /sys 
+umount /dev/pts
+exit
+umount chroot/dev
+
